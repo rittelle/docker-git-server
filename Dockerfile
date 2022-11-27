@@ -16,8 +16,9 @@ WORKDIR /git-server/
 
 # -D flag avoids password generation
 # -s flag changes user's shell
+# an installation without git-annex would use git-shell instead
 RUN mkdir /git-server/keys \
-  && adduser -D -s /usr/bin/git-shell git \
+  && adduser -D -s /usr/bin/git-annex-shell git \
   && echo git:12345 | chpasswd \
   && mkdir /home/git/.ssh
 
