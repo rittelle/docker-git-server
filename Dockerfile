@@ -6,7 +6,8 @@ MAINTAINER Carlos Bernárdez "carlos@z4studios.com"
 # "--update + rm -rf /var/cache/apk/*" (to remove cache)
 RUN apk add --no-cache \
   openssh \
-  git
+  git \
+  git-annex
 
 # Key generation on the server
 RUN ssh-keygen -A
