@@ -4,6 +4,9 @@
 
 A lightweight Git Server Docker image built with Alpine Linux. Available on [GitHub](https://github.com/jkarlosb/git-server-docker) and [Docker Hub](https://hub.docker.com/r/jkarlos/git-server-docker/)
 
+This image only supports amd64 and arm64 as git-annex is not available on other platforms.
+
+
 ### Basic Usage
 
 How to run the container in port 2222 with two volumes: keys volume for public keys and repos volume for git repositories:
