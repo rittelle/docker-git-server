@@ -8,6 +8,8 @@ if [ "$(ls -A /git-server/keys/)" ]; then
   chown -R git:git .ssh
   chmod 700 .ssh
   chmod -R 600 .ssh/*
+else
+  echo "No keys present, ssh login will not work."
 fi
 
 # Checking permissions and fixing SGID bit in repos folder
@@ -17,6 +19,8 @@ if [ "$(ls -A /git-server/repos/)" ]; then
   chown -R git:git .
   chmod -R ug+rwX .
   find . -type d -exec chmod g+s '{}' +
+else
+  echo "No repos found, running this is pretty pointless."
 fi
 
 # -D flag avoids executing sshd as a daemon
