@@ -3,8 +3,7 @@ version: '3'
 services:
 
   git-server:
-    image: jkarlos/git-server-docker
-    #build: .
+    image: rittelle/git-server
     restart: always
     container_name: git-server
     ports:
