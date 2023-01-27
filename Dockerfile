@@ -7,9 +7,6 @@ RUN apk add --no-cache \
   git \
   git-annex
 
-# Key generation on the server
-RUN ssh-keygen -A
-
 WORKDIR /git-server/
 
 # -D flag avoids password generation
