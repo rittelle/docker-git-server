@@ -1,29 +1,33 @@
-FROM alpine:3.4
+FROM alpine:3.17.0
 
 MAINTAINER Carlos Bernárdez "carlos@z4studios.com"
 
 # "--no-cache" is new in Alpine 3.3 and it avoid using
 # "--update + rm -rf /var/cache/apk/*" (to remove cache)
 RUN apk add --no-cache \
-# openssh=7.2_p2-r1 \
   openssh \
-# git=2.8.3-r0
-  git
+  git \
+  git-annex
 
 # Key generation on the server
 RUN ssh-keygen -A
-
-# SSH autorun
-# RUN rc-update add sshd
 
 WORKDIR /git-server/
 
 # -D flag avoids password generation
 # -s flag changes user's shell
+# an installation without git-annex would use git-shell instead
 RUN mkdir /git-server/keys \
-  && adduser -D -s /usr/bin/git-shell git \
+  && adduser -D -s /usr/bin/git-annex-shell git \
   && echo git:12345 | chpasswd \
   && mkdir /home/git/.ssh
+
+# set global git config for git-annex
+USER git
+RUN git config --global user.name "git" \
+  && git config --global user.email "git@example.com"
+
+USER root
 
 # This is a login shell for SSH accounts to provide restricted Git access.
 # It permits execution only of server-side Git commands implementing the
